@@ -15,6 +15,7 @@ gpio.setmode(gpio.BOARD)
 LED = 31  # assign pin number
 
 gpio.setup(LED, gpio.OUT)
+gpio.setwarnings(False)
 
 print('Blinker started. ctrl-c to abort.\n')
 try:
@@ -26,3 +27,6 @@ try:
 
 except(EOFError, KeyboardInterrupt):
     print('\nUser input cancelled. Aborting...')
+    gpio.output(31, gpio.LOW)
+
+gpio.cleanup()
