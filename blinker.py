@@ -18,13 +18,16 @@ except RuntimeError:
 LED = 31  # assign pin number
 
 
-def main():
-    led_state = False
-
+def gpio_setup():
     gpio.setwarnings(False)
     gpio.setmode(gpio.BOARD)
     gpio.setup(LED, gpio.OUT)
 
+
+def main():
+    led_state = False
+    gpio_setup()
+    
     print('Blinker started. ctrl-c to abort.\n')
     try:
         while True:
