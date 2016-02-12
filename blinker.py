@@ -17,20 +17,29 @@ except RuntimeError:
 
 LED = 31  # assign pin number
 
-gpio.setwarnings(False)
-gpio.setmode(gpio.BOARD)
-gpio.setup(LED, gpio.OUT)
 
-print('Blinker started. ctrl-c to abort.\n')
-try:
-    while True:
-        gpio.output(31, gpio.HIGH)
-        time.sleep(0.3)
+def main():
+    led_state = False
+
+    gpio.setwarnings(False)
+    gpio.setmode(gpio.BOARD)
+    gpio.setup(LED, gpio.OUT)
+
+    print('Blinker started. ctrl-c to abort.\n')
+    try:
+        while True:
+            led_state = not led_state
+            gpio.output(LED, led_state)
+            time.sleep(0.3)
+
+    except(EOFError, KeyboardInterrupt):
+        print('\nUser input cancelled. Aborting...')
         gpio.output(31, gpio.LOW)
-        time.sleep(0.3)
 
-except(EOFError, KeyboardInterrupt):
-    print('\nUser input cancelled. Aborting...')
-    gpio.output(31, gpio.LOW)
+    gpio.cleanup()
 
-gpio.cleanup()
+
+# ----------------------------
+
+if __name__ == '__main__':
+    main()
