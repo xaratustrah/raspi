@@ -8,7 +8,12 @@ Xaratustrah
 """
 
 import time
-import RPi.GPIO as gpio
+
+try:
+    import RPi.GPIO as gpio
+except RuntimeError:
+    print("""Error importing RPi.GPIO!  This is probably because you need superuser privileges.
+                You can achieve this by using 'sudo' to run your script""")
 
 LED = 31  # assign pin number
 
