@@ -27,7 +27,7 @@ def gpio_setup():
 def main():
     led_state = False
     gpio_setup()
-    
+
     print('Blinker started. ctrl-c to abort.\n')
     try:
         while True:
